@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرتو اپلای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            background-color: transparent;
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-line {
+            position: fixed;
+            top: 75px;
+            right: 40px;
+            left: 40px;
+            height: 2px;
+            background: repeating-linear-gradient(to right, transparent, transparent 10px, #333 10px, #333 20px);
+            z-index: 1001;
+        }
+        
+        .header-line::before,
+        .header-line::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 40px;
+            height: 20px;
+            border: 2px dotted #333;
+            border-bottom: none;
+            border-radius: 50% 50% 0 0;
+        }
+        
+        .header-line::before {
+            right: -40px;
+            border-right: none;
+        }
+        
+        .header-line::after {
+            left: -40px;
+            border-left: none;
+        }
+        
+        .logo {
+            font-size: 34px;
+            font-weight: 800;
+            background: linear-gradient(to right, #d4a017, #000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #d4a017;
+        }
+        
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .consult-btn, .call-btn {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+        
+        .consult-btn {
+            background-color: #b78a14;
+            color: #fff;
+        }
+        
+        .call-btn {
+            background-color: #b78a14;
+            color: #fff;
+        }
+        
+        .consult-btn:hover, .call-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #a07812;
+        }
+        
+        .consult-btn i, .call-btn i {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        
+        .hero {
+            margin-top: 120px;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 0 5%;
+            height: 500px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 15px;
+            animation: pulseBorder 2s infinite;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        @keyframes pulseBorder {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(212, 160, 23, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 160, 23, 0);
+            }
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #d4a017;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            object-fit: contain;
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .roadmap {
+            flex: 1;
+            padding-right: 50px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .roadmap-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease;
+            min-height: 80px;
+        }
+        
+        .roadmap-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .roadmap-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #d4a017, #000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 15px;
+            flex-shrink: 0;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .roadmap-content {
+            background-color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            flex-grow: 1;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            border-right: 3px solid #d4a017;
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-item:hover .roadmap-content {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .roadmap-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .roadmap-content p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .roadmap-arrow {
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4a017;
+            font-size: 20px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Form Styles */
+        .form-container {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 22px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #d4a017, #000);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #d4a017;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.2);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #d4a017;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b78a14;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Countries Section */
+        .countries-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countries-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 22px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .countries-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #d4a017, #000);
+        }
+        
+        .countries-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .country-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .country-item:hover {
+            background-color: #f5f5f5;
+            transform: translateX(-5px);
+        }
+        
+        .country-flag-img {
+            width: 40px;
+            height: 25px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .country-name {
+            font-weight: 600;
+            color: #444;
+        }
+        
+        /* Country Details */
+        .country-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-right: 3px solid #d4a017;
+        }
+        
+        .country-details.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .country-details h3 {
+            color: #d4a017;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .country-details ul {
+            list-style-type: none;
+            padding-right: 15px;
+        }
+        
+        .country-details li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-right: 15px;
+        }
+        
+        .country-details li::before {
+            content: "•";
+            color: #d4a017;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        /* Articles Section */
+        .articles-section {
+            margin-top: 30px;
+        }
+        
+        .articles-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .article-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #f5f5f5;
+            margin-bottom: 10px;
+        }
+        
+        .article-name {
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .download-btn {
+            background-color: #d4a017;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background-color: #b78a14;
+        }
+        
+        /* About Page Styles */
+        .about-page {
+            display: none;
+            padding: 120px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-page.active {
+            display: block;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #d4a017, #000);
+        }
+        
+        .about-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .countries {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .country-flag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+        
+        .country-flag img {
+            width: 80px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .country-flag:hover img {
+            transform: scale(1.1);
+        }
+        
+        .country-flag span {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .modal-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .modal-close-btn {
+            background-color: #d4a017;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close-btn:hover {
+            background-color: #b78a14;
+        }
+
+        /* Call Modal Styles */
+        .call-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .call-modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .call-number-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .call-number-btn:hover {
+            background-color: #d4a017;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .call-number-btn i {
+            margin-left: 8px;
+        }
+
+        .call-close-btn {
+            background-color: #d4a017;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .call-close-btn:hover {
+            background-color: #b78a14;
+        }
+        
+        @media (max-width: 1200px) {
+            .hero {
+                height: auto;
+                flex-direction: column;
+            }
+            
+            .roadmap {
+                padding-right: 0;
+                margin-top: 30px;
+            }
+            
+            .form-container {
+                margin-left: 0;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav {
+                margin: 15px 0;
+            }
+            
+            .header-buttons {
+                margin-top: 15px;
+            }
+            
+            .header-line {
+                top: 150px;
+                right: 20px;
+                left: 20px;
+            }
+            
+            .header-line::before {
+                right: -20px;
+            }
+            
+            .header-line::after {
+                left: -20px;
+            }
+            
+            .hero {
+                margin-top: 170px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .header-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .consult-btn, .call-btn {
+                margin: 5px;
+            }
+            
+            .roadmap-item {
+                min-height: 70px;
+            }
+            
+            .roadmap-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .roadmap-content h3 {
+                font-size: 15px;
+            }
+            
+            .roadmap-content p {
+                font-size: 12px;
+            }
+            
+            .form-title, .countries-title {
+                font-size: 20px;
+            }
+            
+            .about-header h1 {
+                font-size: 28px;
+            }
+            
+            .about-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 28px;
+            }
+            
+            .hero {
+                margin-top: 140px;
+                padding: 0 15px;
+            }
+            
+            .roadmap-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .roadmap-icon {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            
+            .roadmap-arrow {
+                display: none;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 8px 12px;
+            }
+            
+            .submit-btn {
+                padding: 10px;
+            }
+            
+            .country-item {
+                padding: 8px;
+            }
+            
+            .country-flag-img {
+                width: 30px;
+                height: 20px;
+            }
+            
+            .country-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <a href="#" class="logo" onclick="showHomePage()">پرتو اپلای</a>
+        <nav>
+            <ul>
+                <li><a href="#">کشورها</a></li>
+                <li><a href="#">مهاجرت</a></li>
+                <li><a href="#">ویزا</a></li>
+                <li><a href="#">مقالات</a></li>
+                <li><a href="#" onclick="showAboutPage()">درباره ما</a></li>
+                <li><a href="#">تماس با ما</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <a href="#" class="call-btn" id="call-btn">
+                <i class="fas fa-phone"></i>
+                تماس مستقیم
+            </a>
+            <a href="#" class="consult-btn" id="consult-btn">
+                <i class="fas fa-calendar-alt"></i>
+                رزرو مشاوره
+            </a>
+        </div>
+    </header>
+    <div class="header-line"></div>
+    
+    <!-- Main Content -->
+    <div id="main-content">
+        <section class="hero">
+            <div class="hero-image">
+                <img src="https://cdn.imgurl.ir/uploads/q6087_ets_task_01jvyb88wwev2rys5tre0qkg9a_1747996478_img_2.webp" alt="پرتو اپلای">
+            </div>
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <div class="roadmap-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h3>تماس با موسسه یا تکمیل فرم مشاوره</h3>
+                        <p>اولین گام برای شروع پروسه مهاجرت</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="roadmap-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h3>دریافت مشاوره رایگان</h3>
+                        <p>کارشناسان ما راهنمایی کامل ارائه می‌دهند</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="roadmap-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h3>تعیین وقت مشاوره تخصصی</h3>
+                        <p>برنامه‌ریزی دقیق برای مراحل بعدی</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="roadmap-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h3>آماده سازی و صدور مدارک</h3>
+                        <p>پیگیری کامل تمام مراحل اداری</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="roadmap-icon">
+                        <i class="fas fa-plane-arrival"></i>
+                    </div>
+                    <div class="roadmap-content">
+                        <h3>همراه شما تا انتهای مقصد</h3>
+                        <p>پشتیبانی حتی پس از مهاجرت</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="display: flex; padding: 0 5%; margin-top: 50px; margin-bottom: 50px; gap: 30px;" class="form-section">
+            <div class="form-container" id="consultation-form-container">
+                <h2 class="form-title">فرم درخواست مشاوره</h2>
+                <form id="consultation-form">
+                    <div class="form-group">
+                        <label for="fullname">نام و نام خانوادگی</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">سن</label>
+                        <input type="number" id="age" name="age" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="education">آخرین مدرک تحصیلی</label>
+                        <select id="education" name="education" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="دیپلم">دیپلم</option>
+                            <option value="کارشناسی">کارشناسی</option>
+                            <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+                            <option value="دکتری">دکتری</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="field">رشته تحصیلی</label>
+                        <input type="text" id="field" name="field" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">استان و شهر محل زندگی</label>
+                        <input type="text" id="location" name="location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gpa">معدل دیپلم</label>
+                        <input type="number" step="0.01" id="gpa" name="gpa" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="language-cert">آیا مدرک زبان دارید یا خیر</label>
+                        <select id="language-cert" name="language-cert" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="دارم">دارم</option>
+                            <option value="ندارم">ندارم</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="desired-fields">رشته‌های مورد نظر برای تحصیل در خارج کشور</label>
+                        <textarea id="desired-fields" name="desired-fields" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">سالیانه حداکثر چه مقدار می‌توانید شهریه پرداخت کنید (دلار)</label>
+                        <input type="number" id="budget" name="budget" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priority">آیا اولویت خاصی در انتخاب دانشگاه محل تحصیل دارید؟</label>
+                        <textarea id="priority" name="priority" rows="2" placeholder="مثلاً رنکینگ دانشگاه/ مورد تایید وزارت بهداشت ایران بودن/ شهریه مقرون به صرفه و..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">ارسال مستقیم فرم به صفحه چت</button>
+                </form>
+            </div>
+            
+            <div class="countries-section">
+                <h2 class="countries-title">پرتو اپلای در کشورهای زیر دانشجو می‌پذیرد</h2>
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">با انتخاب هر کشور لیست دانشگاه های مورد تایید ایران در سال 2025 را برای آن کشور مشاهده بفرمایید</p>
+                
+                <div class="countries-list">
+                    <div class="country-item" onclick="toggleCountryDetails('spain')">
+                        <img src="https://flagcdn.com/w40/es.png" alt="اسپانیا" class="country-flag-img">
+                        <span class="country-name">اسپانیا</span>
+                    </div>
+                    
+                    <div id="spain-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <ul>
+                            <li>دانشگاه بارسلونا (University of Barcelona)</li>
+                            <li>دانشگاه اتونوما مادرید (Autonomous University of Madrid)</li>
+                            <li>دانشگاه والنسیا (University of Valencia)</li>
+                            <li>دانشگاه کمپلوتنسه مادرید (Complutense University of Madrid)</li>
+                            <li>دانشگاه سویل (University of Seville)</li>
+                            <li>دانشگاه گرانادا (University of Granada)</li>
+                            <li>دانشگاه ناوارا (University of Navarra)</li>
+                            <li>دانشگاه زاراگوزا (University of Zaragoza)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="country-item" onclick="toggleCountryDetails('russia')">
+                        <img src="https://flagcdn.com/w40/ru.png" alt="روسیه" class="country-flag-img">
+                        <span class="country-name">روسیه</span>
+                    </div>
+                    
+                    <div id="russia-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <ul>
+                            <li>دانشگاه سچنوف (Sechenov University)</li>
+                            <li>دانشگاه ملی تحقیقات پزشکی پیروگوف (Pirogov Russian National Research Medical University)</li>
+                            <li>دانشگاه دوستی ملل روسیه (Peoples' Friendship University of Russia - RUDN)</li>
+                            <li>دانشگاه فدرال کازان (Kazan Federal University)</li>
+                            <li>دانشگاه پزشکی کازان (Kazan State Medical University)</li>
+                            <li>دانشگاه پزشکی سیبری (Siberian State Medical University)</li>
+                            <li>دانشگاه پزشکی ولگوگراد (Volgograd State Medical University)</li>
+                            <li>دانشگاه پزشکی آستراخان (Astrakhan State Medical University)</li>
+                            <li>دانشگاه پزشکی اورنبورگ (Orenburg State Medical University)</li>
+                            <li>دانشگاه پزشکی ریازان (Ryazan State Medical University)</li>
+                            <li>دانشگاه پزشکی تومسک (Tomsk State University)</li>
+                            <li>دانشگاه پزشکی سماشکو (A.I. Evdokimov Moscow State University of Medicine and Dentistry)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="country-item" onclick="toggleCountryDetails('turkey')">
+                        <img src="https://flagcdn.com/w40/tr.png" alt="ترکیه" class="country-flag-img">
+                        <span class="country-name">ترکیه</span>
+                    </div>
+                    
+                    <div id="turkey-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <h4>🎓 دانشگاه‌های دولتی مورد تأیید:</h4>
+                        <ul>
+                            <li>دانشگاه حاجت‌تپه (Hacettepe University) – آنکارا</li>
+                            <li>دانشگاه استانبول (Istanbul University) – استانبول</li>
+                            <li>دانشگاه آنکارا (Ankara University) – آنکارا</li>
+                            <li>دانشگاه آتاتورک (Ataturk University) – ارزروم</li>
+                            <li>دانشگاه قاضی (Gazi University) – آنکارا</li>
+                            <li>دانشگاه اژه (Ege University) – ازمیر</li>
+                            <li>دانشگاه دوکوز ایلول (Dokuz Eylul University) – ازمیر</li>
+                            <li>دانشگاه مارمارا (Marmara University) – استانبول</li>
+                            <li>دانشگاه ازمیر کاتب چلبی (Izmir Katip Celebi University) – ازمیر</li>
+                            <li>دانشگاه ۱۹ مایس (Ondokuz Mayis University) – سامسون</li>
+                        </ul>
+                        <h4>🏛️ دانشگاه‌های خصوصی مورد تأیید:</h4>
+                        <ul>
+                            <li>دانشگاه کوچ (Koç University) – استانبول</li>
+                            <li>دانشگاه باهچه شهیر (Bahçeşehir University) – استانبول</li>
+                            <li>دانشگاه آجی بادم (Acıbadem University) – استانبول</li>
+                            <li>دانشگاه باشکنت (Başkent University) – آنکارا</li>
+                            <li>دانشگاه یدی تپه (Yeditepe University) – استانبول</li>
+                            <li>دانشگاه آیدین استانبول (Istanbul Aydın University) – استانبول</li>
+                            <li>دانشگاه مدیپول (Medipol University) – استانبول</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="country-item" onclick="toggleCountryDetails('cyprus')">
+                        <img src="https://flagcdn.com/w40/cy.png" alt="قبرس" class="country-flag-img">
+                        <span class="country-name">قبرس</span>
+                    </div>
+                    
+                    <div id="cyprus-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <p>در حال حاضر، هیچ دانشگاهی در قبرس شمالی یا جنوبی در لیست دانشگاه‌های مورد تأیید وزارت بهداشت ایران برای سال تحصیلی ۲۰۲۵–۲۰۲۶ قرار ندارد. پیش‌تر، دانشگاه خاور نزدیک (Near East University) در لیست قرار داشت، اما از لیست حذف شده است.</p>
+                    </div>
+                    
+                    <div class="country-item" onclick="toggleCountryDetails('pakistan')">
+                        <img src="https://flagcdn.com/w40/pk.png" alt="پاکستان" class="country-flag-img">
+                        <span class="country-name">پاکستان</span>
+                    </div>
+                    
+                    <div id="pakistan-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <ul>
+                            <li>دانشگاه آقاخان (Aga Khan University)</li>
+                            <li>دانشگاه کراچی (University of Karachi)</li>
+                            <li>دانشگاه لاهور (University of Lahore)</li>
+                            <li>دانشگاه قائد اعظم (Quaid-i-Azam University)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="country-item" onclick="toggleCountryDetails('china')">
+                        <img src="https://flagcdn.com/w40/cn.png" alt="چین" class="country-flag-img">
+                        <span class="country-name">چین</span>
+                    </div>
+                    
+                    <div id="china-details" class="country-details">
+                        <h3>لیست دانشگاه های مورد تایید:</h3>
+                        <ul>
+                            <li>دانشگاه پکن (Peking University)</li>
+                            <li>دانشگاه فودان (Fudan University)</li>
+                            <li>دانشگاه شانگهای جیاو تونگ (Shanghai Jiao Tong University)</li>
+                            <li>دانشگاه ژجیانگ (Zhejiang University)</li>
+                            <li>دانشگاه نانجینگ (Nanjing University)</li>
+                            <li>دانشگاه ووهان (Wuhan University)</li>
+                            <li>دانشگاه پزشکی چین (China Medical University)</li>
+                            <li>دانشگاه پزشکی دالیان (Dalian Medical University)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="articles-section">
+                    <h3 class="articles-title">مقالات پرتو اپلای</h3>
+                    <div class="article-item">
+                        <span class="article-name">مقالات پذیرش تحصیلی دانشگاه های لاهور،اسپانیا،چین</span>
+                        <a href="https://cdn.imgurl.ir/uploads/l183443___.pdf" class="download-btn" download>دانلود مستقیم</a>
+                    </div>
+                    <div class="article-item">
+                        <span class="article-name">مقالات پذیرش تحصیلی دانشگاه های لاهور،اسپانیا،چین</span>
+                        <a href="https://cdn.imgurl.ir/uploads/u619853___.pdf" class="download-btn" download>دانلود مستقیم</a>
+                    </div>
+                    <div class="article-item">
+                        <span class="article-name">مقالات پذیرش تحصیلی دانشگاه های لاهور،اسپانیا،چین</span>
+                        <a href="https://cdn.imgurl.ir/uploads/k242827_____.pdf" class="download-btn" download>دانلود مستقیم</a>
+                    </div>
+                    <div class="article-item">
+                        <span class="article-name">لیست بورسیه ای های 100% ترکیه(به تفکیک دانشگاه و رشته)</span>
+                        <a href="https://cdn.imgurl.ir/uploads/s9498_Ivory_Black_Minimal_Corporate_Business_Plan_Cover_Page_20250517_133500_0000.jpg" class="download-btn" download>دانلود مستقیم</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- About Page -->
+    <div id="about-page" class="about-page">
+        <div class="about-header">
+            <h1>درباره تیم پرتو اپلای</h1>
+        </div>
+        
+        <div class="about-content">
+            <p>تیم مهاجرتی پرتو اپلای، در جهت سهولت مسیر مهاجرتی دانشجویان، شکل گرفته است. این تیم متشکل از ۵ نفر از دانشجویان مسئولیت پذیر و توانا و همچنین حرفه‌ای، که با ایده گرفتن از تجربیات و سختی‌های آغاز مهاجرت خود، مسیر مهاجرت دانشجویان را هموار خواهند کرد.</p>
+            
+            <p>ما در پرتو اپلای با تکیه بر تجربه‌های شخصی و تخصصی خود، خدمات مهاجرتی را با کیفیت بالا و به صورت کاملاً اختصاصی ارائه می‌دهیم. هدف ما تنها اخذ پذیرش نیست، بلکه همراهی شما در تمام مراحل مهاجرت از ابتدا تا رسیدن به مقصد و حتی پس از آن است.</p>
+            
+            <h3 style="color: #d4a017; margin: 30px 0 15px; text-align: center;">خدمات ما در کشورهای زیر:</h3>
+            
+            <div class="countries">
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/es.png" alt="اسپانیا">
+                    <span>اسپانیا</span>
+                </div>
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/pk.png" alt="پاکستان">
+                    <span>پاکستان</span>
+                </div>
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/tr.png" alt="ترکیه">
+                    <span>ترکیه</span>
+                </div>
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/cy.png" alt="قبرس">
+                    <span>قبرس</span>
+                </div>
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/ru.png" alt="روسیه">
+                    <span>روسیه</span>
+                </div>
+                <div class="country-flag">
+                    <img src="https://flagcdn.com/w80/cn.png" alt="چین">
+                    <span>چین</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <p>کاربر عزیز...<br>
+            بعد از تکمیل فرم و زدن دکمه ارسال،فرم تکمیل شده،شما را به صفحه واتس اپ پرتو اپلای هدایت میکند...<br>
+            و پس از ارسال نهایی شما،فیلدهای پرشده برای پرتو اپلای ارسال خواهند شد<br>
+            سپس منتظر پاسخ از طرف پرتو اپلای بمانید<br>
+            ممنون از شکیبایی شما</p>
+            <button class="modal-close-btn" onclick="closeModal()">متوجه شدم</button>
+        </div>
+    </div>
+
+    <!-- Call Modal -->
+    <div id="call-modal" class="call-modal">
+        <div class="call-modal-content">
+            <h3 style="color: #d4a017; margin-bottom: 20px;">تماس با پرتو اپلای</h3>
+            <p style="margin-bottom: 20px;">لطفاً یکی از شماره‌های زیر را انتخاب کنید:</p>
+            
+            <a href="tel:+923137518262" class="call-number-btn">
+                <i class="fas fa-phone"></i>
+                +923137518262
+            </a>
+            
+            <a href="tel:+989018070825" class="call-number-btn">
+                <i class="fas fa-phone"></i>
+                +989018070825
+            </a>
+            
+            <a href="tel:+923138624141" class="call-number-btn">
+                <i class="fas fa-phone"></i>
+                +923138624141
+            </a>
+            
+            <button class="call-close-btn" onclick="closeCallModal()">بستن</button>
+        </div>
+    </div>
+
+    <script>
+        // اسکرول هدر
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // انیمیشن نقشه راه
+        document.addEventListener('DOMContentLoaded', function() {
+            const roadmapItems = document.querySelectorAll('.roadmap-item');
+            
+            function checkVisibility() {
+                roadmapItems.forEach((item, index) => {
+                    const rect = item.getBoundingClientRect();
+                    const isVisible = (rect.top <= window.innerHeight * 0.8);
+                    
+                    if (isVisible) {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 150);
+                    }
+                });
+            }
+            
+            // بررسی اولیه
+            checkVisibility();
+            
+            // بررسی هنگام اسکرول
+            window.addEventListener('scroll', checkVisibility);
+        });
+        
+        // Show About Page
+        function showAboutPage() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('about-page').classList.add('active');
+            window.scrollTo(0, 0);
+            return false;
+        }
+        
+        // Show Home Page
+        function showHomePage() {
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('about-page').classList.remove('active');
+            window.scrollTo(0, 0);
+            return false;
+        }
+
+        // Form Submission to WhatsApp
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            let whatsappMessage = "درخواست مشاوره از پرتو اپلای:\n\n";
+            
+            // Add all form fields to the message
+            whatsappMessage += `👤 نام و نام خانوادگی: ${formData.get('fullname')}\n`;
+            whatsappMessage += `🎂 سن: ${formData.get('age')}\n`;
+            whatsappMessage += `🎓 آخرین مدرک تحصیلی: ${formData.get('education')}\n`;
+            whatsappMessage += `📚 رشته تحصیلی: ${formData.get('field')}\n`;
+            whatsappMessage += `📍 استان و شهر محل زندگی: ${formData.get('location')}\n`;
+            whatsappMessage += `📊 معدل دیپلم: ${formData.get('gpa')}\n`;
+            whatsappMessage += `🌐 مدرک زبان: ${formData.get('language-cert')}\n`;
+            whatsappMessage += `🎯 رشته‌های مورد نظر: ${formData.get('desired-fields')}\n`;
+            whatsappMessage += `💰 بودجه سالیانه (دلار): ${formData.get('budget')}\n`;
+            whatsappMessage += `⭐ اولویت‌های دانشگاه: ${formData.get('priority') || 'ندارد'}\n`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // WhatsApp number
+            const whatsappNumber = "+923137518262";
+            
+            // Open WhatsApp with the message
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        });
+        
+        // Toggle country details
+        let currentOpenCountry = null;
+        
+        function toggleCountryDetails(country) {
+            const detailsElement = document.getElementById(`${country}-details`);
+            
+            // Close previously opened country
+            if (currentOpenCountry && currentOpenCountry !== detailsElement) {
+                currentOpenCountry.classList.remove('active');
+            }
+            
+            // Toggle current country
+            if (detailsElement.classList.contains('active')) {
+                detailsElement.classList.remove('active');
+                currentOpenCountry = null;
+            } else {
+                detailsElement.classList.add('active');
+                currentOpenCountry = detailsElement;
+            }
+        }
+        
+        // Scroll to form when consult button is clicked
+        document.getElementById('consult-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('consultation-form-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show modal when focusing on fullname field (only once)
+        let modalShown = localStorage.getItem('modalShown');
+        document.getElementById('fullname').addEventListener('focus', function() {
+            if (!modalShown) {
+                document.getElementById('info-modal').style.display = 'flex';
+                localStorage.setItem('modalShown', 'true');
+            }
+        });
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('info-modal').style.display = 'none';
+        }
+        
+        // Open call modal
+        document.getElementById('call-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('call-modal').style.display = 'flex';
+        });
+        
+        // Close call modal
+        function closeCallModal() {
+            document.getElementById('call-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
