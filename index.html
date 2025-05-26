@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پرتو اپلای</title>
+    <title>پرتو اپلای | مشاوره تخصصی مهاجرت تحصیلی</title>
+    <meta name="description" content="پرتو اپلای ارائه دهنده خدمات مشاوره و اخذ پذیرش تحصیلی از دانشگاه‌های معتبر جهان در کشورهای اسپانیا، ترکیه، روسیه، چین و پاکستان">
+    <meta name="keywords" content="مهاجرت تحصیلی, اخذ پذیرش, ویزای تحصیلی, مشاوره مهاجرت, تحصیل در خارج">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
-        
         :root {
             --primary-color: #d4a017;
             --primary-dark: #b78a14;
@@ -18,6 +21,7 @@
             --white: #fff;
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --header-height: 80px;
         }
         
         * {
@@ -33,6 +37,7 @@
             position: relative;
             color: var(--text-color);
             line-height: 1.6;
+            padding-top: var(--header-height);
         }
         
         /* Header Styles */
@@ -47,13 +52,14 @@
             align-items: center;
             transition: var(--transition);
             z-index: 1000;
-            background-color: transparent;
-        }
-        
-        header.scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        header.scrolled {
             box-shadow: var(--shadow);
             padding: 10px 5%;
         }
@@ -64,7 +70,7 @@
         
         .header-line {
             position: fixed;
-            top: 75px;
+            top: var(--header-height);
             right: 40px;
             left: 40px;
             height: 2px;
@@ -95,7 +101,7 @@
         }
         
         .logo {
-            font-size: 34px;
+            font-size: 28px;
             font-weight: 800;
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
@@ -104,10 +110,17 @@
             text-decoration: none;
             letter-spacing: -1px;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
         }
         
         .logo:hover {
             transform: scale(1.05);
+        }
+        
+        .logo-icon {
+            margin-left: 8px;
+            font-size: 24px;
         }
         
         nav ul {
@@ -116,7 +129,7 @@
         }
         
         nav ul li {
-            margin-left: 30px;
+            margin-left: 20px;
             position: relative;
         }
         
@@ -124,10 +137,11 @@
             text-decoration: none;
             color: var(--text-color);
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             transition: var(--transition);
             position: relative;
             padding: 5px 0;
+            display: block;
         }
         
         nav ul li a:hover {
@@ -158,14 +172,15 @@
         .consult-btn, .call-btn {
             display: flex;
             align-items: center;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             text-decoration: none;
             transition: var(--transition);
-            margin-right: 15px;
+            margin-right: 10px;
             border: 2px solid transparent;
+            white-space: nowrap;
         }
         
         .consult-btn {
@@ -186,18 +201,28 @@
         }
         
         .consult-btn i, .call-btn i {
-            margin-left: 10px;
-            font-size: 16px;
+            margin-left: 8px;
+            font-size: 15px;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
         }
         
         /* Hero Section */
         .hero {
-            margin-top: 120px;
+            margin-top: 40px;
             display: flex;
             justify-content: space-between;
             align-items: stretch;
             padding: 0 5%;
-            height: 500px;
             gap: 30px;
         }
         
@@ -213,6 +238,7 @@
             justify-content: center;
             border-radius: 15px;
             overflow: hidden;
+            min-height: 400px;
         }
         
         @keyframes pulseBorder {
@@ -669,6 +695,8 @@
         .article-name {
             font-weight: 500;
             color: var(--text-color);
+            flex: 1;
+            padding-left: 10px;
         }
         
         .download-btn {
@@ -684,6 +712,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
         }
         
         .download-btn:hover {
@@ -695,7 +724,7 @@
         /* About Page Styles */
         .about-page {
             display: none;
-            padding: 120px 5% 80px;
+            padding: 40px 5% 80px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -961,12 +990,12 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 25px;
+            gap: 15px;
         }
         
         .footer-links a {
             color: #ccc;
             text-decoration: none;
-            margin: 0 15px;
             transition: var(--transition);
         }
         
@@ -1035,6 +1064,33 @@
             transform: translateY(-5px);
         }
         
+        /* Loading Animation */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* Responsive Styles */
         @media (max-width: 1200px) {
             .hero {
@@ -1055,21 +1111,34 @@
         }
         
         @media (max-width: 992px) {
-            header {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: var(--header-height);
+                right: 0;
+                left: 0;
+                background-color: var(--white);
                 flex-direction: column;
-                padding: 15px;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-radius: 0 0 15px 15px;
+                z-index: 999;
             }
             
-            nav {
-                margin: 15px 0;
+            nav ul.show {
+                display: flex;
             }
             
-            .header-buttons {
-                margin-top: 15px;
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .header-line {
-                top: 150px;
+                top: var(--header-height);
                 right: 20px;
                 left: 20px;
             }
@@ -1083,7 +1152,7 @@
             }
             
             .hero {
-                margin-top: 170px;
+                margin-top: 30px;
             }
             
             .about-content {
@@ -1092,15 +1161,6 @@
         }
         
         @media (max-width: 768px) {
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 5px 10px;
-            }
-            
             .header-buttons {
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -1159,11 +1219,10 @@
         
         @media (max-width: 576px) {
             .logo {
-                font-size: 28px;
+                font-size: 24px;
             }
             
             .hero {
-                margin-top: 140px;
                 padding: 0 15px;
             }
             
@@ -1227,36 +1286,8 @@
             }
 
             /* Mobile header buttons layout */
-            header {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .logo {
-                order: 1;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
             .header-buttons {
-                order: 2;
-                width: 100%;
-                justify-content: space-around;
-                margin-top: 0;
-            }
-
-            nav {
-                order: 3;
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            .consult-btn, .call-btn {
-                margin: 0;
-                padding: 10px 15px;
-                font-size: 14px;
+                display: none;
             }
             
             .back-to-top {
@@ -1270,28 +1301,42 @@
     </style>
 </head>
 <body>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
     <header id="header">
-        <a href="#" class="logo" onclick="showHomePage()">پرتو اپلای</a>
+        <a href="#" class="logo" onclick="showHomePage()">
+            پرتو اپلای
+            <i class="fas fa-graduation-cap logo-icon"></i>
+        </a>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#" onclick="scrollToSection('countries-section')">کشورها</a></li>
+                <li><a href="#" onclick="scrollToSection('consultation-form-container')">مهاجرت</a></li>
+                <li><a href="#" onclick="showModal('ویزا')">ویزا</a></li>
+                <li><a href="#" onclick="scrollToSection('articles-section')">مقالات</a></li>
+                <li><a href="#" onclick="showAboutPage()">درباره ما</a></li>
+                <li><a href="#" onclick="showCallModal()">تماس با ما</a></li>
+            </ul>
+        </nav>
+        
         <div class="header-buttons">
-            <a href="#" class="call-btn" id="call-btn">
+            <a href="#" class="call-btn" onclick="showCallModal()">
                 <i class="fas fa-phone"></i>
                 تماس مستقیم
             </a>
-            <a href="#" class="consult-btn" id="consult-btn">
+            <a href="#" class="consult-btn" onclick="scrollToSection('consultation-form-container')">
                 <i class="fas fa-calendar-alt"></i>
                 رزرو مشاوره
             </a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">کشورها</a></li>
-                <li><a href="#">مهاجرت</a></li>
-                <li><a href="#">ویزا</a></li>
-                <li><a href="#">مقالات</a></li>
-                <li><a href="#" onclick="showAboutPage()">درباره ما</a></li>
-                <li><a href="#">تماس با ما</a></li>
-            </ul>
-        </nav>
     </header>
     <div class="header-line"></div>
     
@@ -1299,7 +1344,7 @@
     <div id="main-content">
         <section class="hero">
             <div class="hero-image">
-                <img src="https://cdn.imgurl.ir/uploads/q6087_ets_task_01jvyb88wwev2rys5tre0qkg9a_1747996478_img_2.webp" alt="پرتو اپلای">
+                <img src="https://cdn.imgurl.ir/uploads/q6087_ets_task_01jvyb88wwev2rys5tre0qkg9a_1747996478_img_2.webp" alt="پرتو اپلای - مشاوره مهاجرت تحصیلی" loading="lazy">
             </div>
             <div class="roadmap">
                 <div class="roadmap-item">
@@ -1377,7 +1422,7 @@
                     
                     <div class="form-group">
                         <label for="age">سن <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
-                        <input type="number" id="age" name="age" required>
+                        <input type="number" id="age" name="age" required min="16" max="60">
                     </div>
                     
                     <div class="form-group">
@@ -1403,7 +1448,7 @@
                     
                     <div class="form-group">
                         <label for="gpa">معدل دیپلم <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
-                        <input type="number" step="0.01" id="gpa" name="gpa" required>
+                        <input type="number" step="0.01" id="gpa" name="gpa" required min="10" max="20">
                     </div>
                     
                     <div class="form-group">
@@ -1422,7 +1467,7 @@
                     
                     <div class="form-group">
                         <label for="budget">سالیانه حداکثر چه مقدار می‌توانید شهریه پرداخت کنید (دلار) <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
-                        <input type="number" id="budget" name="budget" required>
+                        <input type="number" id="budget" name="budget" required min="1000">
                     </div>
                     
                     <div class="form-group">
@@ -1430,17 +1475,22 @@
                         <textarea id="priority" name="priority" rows="2" placeholder="مثلاً رنکینگ دانشگاه/ مورد تایید وزارت بهداشت ایران بودن/ شهریه مقرون به صرفه و..."></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">ارسال مستقیم فرم به صفحه چت</button>
+                    <button type="submit" class="submit-btn">
+                        <span id="submit-text">ارسال مستقیم فرم به صفحه چت</span>
+                        <span id="submit-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> در حال ارسال...
+                        </span>
+                    </button>
                 </form>
             </div>
             
-            <div class="countries-section">
+            <div class="countries-section" id="countries-section">
                 <h2 class="countries-title">پرتو اپلای در کشورهای زیر دانشجو می‌پذیرد</h2>
                 <p style="text-align: center; margin-bottom: 20px; color: #666;">با انتخاب هر کشور لیست دانشگاه های مورد تایید ایران در سال 2025 را برای آن کشور مشاهده بفرمایید</p>
                 
                 <div class="countries-list">
                     <div class="country-item" onclick="toggleCountryDetails('spain')">
-                        <img src="https://flagcdn.com/w40/es.png" alt="اسپانیا" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/es.png" alt="اسپانیا" class="country-flag-img" loading="lazy">
                         <span class="country-name">اسپانیا</span>
                     </div>
                     
@@ -1459,7 +1509,7 @@
                     </div>
                     
                     <div class="country-item" onclick="toggleCountryDetails('russia')">
-                        <img src="https://flagcdn.com/w40/ru.png" alt="روسیه" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/ru.png" alt="روسیه" class="country-flag-img" loading="lazy">
                         <span class="country-name">روسیه</span>
                     </div>
                     
@@ -1482,7 +1532,7 @@
                     </div>
                     
                     <div class="country-item" onclick="toggleCountryDetails('turkey')">
-                        <img src="https://flagcdn.com/w40/tr.png" alt="ترکیه" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/tr.png" alt="ترکیه" class="country-flag-img" loading="lazy">
                         <span class="country-name">ترکیه</span>
                     </div>
                     
@@ -1514,7 +1564,7 @@
                     </div>
                     
                     <div class="country-item" onclick="toggleCountryDetails('cyprus')">
-                        <img src="https://flagcdn.com/w40/cy.png" alt="قبرس" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/cy.png" alt="قبرس" class="country-flag-img" loading="lazy">
                         <span class="country-name">قبرس</span>
                     </div>
                     
@@ -1524,7 +1574,7 @@
                     </div>
                     
                     <div class="country-item" onclick="toggleCountryDetails('pakistan')">
-                        <img src="https://flagcdn.com/w40/pk.png" alt="پاکستان" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/pk.png" alt="پاکستان" class="country-flag-img" loading="lazy">
                         <span class="country-name">پاکستان</span>
                     </div>
                     
@@ -1539,7 +1589,7 @@
                     </div>
                     
                     <div class="country-item" onclick="toggleCountryDetails('china')">
-                        <img src="https://flagcdn.com/w40/cn.png" alt="چین" class="country-flag-img">
+                        <img src="https://flagcdn.com/w40/cn.png" alt="چین" class="country-flag-img" loading="lazy">
                         <span class="country-name">چین</span>
                     </div>
                     
@@ -1558,7 +1608,7 @@
                     </div>
                 </div>
                 
-                <div class="articles-section">
+                <div class="articles-section" id="articles-section">
                     <h3 class="articles-title">مقالات پرتو اپلای</h3>
                     <div class="article-item">
                         <span class="article-name">مقالات پذیرش تحصیلی دانشگاه های لاهور،اسپانیا،چین</span>
@@ -1608,27 +1658,27 @@
             
             <div class="countries">
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/es.png" alt="اسپانیا">
+                    <img src="https://flagcdn.com/w80/es.png" alt="اسپانیا" loading="lazy">
                     <span>اسپانیا</span>
                 </div>
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/pk.png" alt="پاکستان">
+                    <img src="https://flagcdn.com/w80/pk.png" alt="پاکستان" loading="lazy">
                     <span>پاکستان</span>
                 </div>
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/tr.png" alt="ترکیه">
+                    <img src="https://flagcdn.com/w80/tr.png" alt="ترکیه" loading="lazy">
                     <span>ترکیه</span>
                 </div>
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/cy.png" alt="قبرس">
+                    <img src="https://flagcdn.com/w80/cy.png" alt="قبرس" loading="lazy">
                     <span>قبرس</span>
                 </div>
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/ru.png" alt="روسیه">
+                    <img src="https://flagcdn.com/w80/ru.png" alt="روسیه" loading="lazy">
                     <span>روسیه</span>
                 </div>
                 <div class="country-flag">
-                    <img src="https://flagcdn.com/w80/cn.png" alt="چین">
+                    <img src="https://flagcdn.com/w80/cn.png" alt="چین" loading="lazy">
                     <span>چین</span>
                 </div>
             </div>
@@ -1640,18 +1690,18 @@
         <div class="footer-content">
             <a href="#" class="footer-logo">پرتو اپلای</a>
             <div class="footer-links">
-                <a href="#">صفحه اصلی</a>
-                <a href="#">خدمات ما</a>
-                <a href="#">کشورها</a>
-                <a href="#">مقالات</a>
+                <a href="#" onclick="showHomePage()">صفحه اصلی</a>
+                <a href="#" onclick="scrollToSection('consultation-form-container')">خدمات ما</a>
+                <a href="#" onclick="scrollToSection('countries-section')">کشورها</a>
+                <a href="#" onclick="scrollToSection('articles-section')">مقالات</a>
                 <a href="#" onclick="showAboutPage()">درباره ما</a>
-                <a href="#">تماس با ما</a>
+                <a href="#" onclick="showCallModal()">تماس با ما</a>
             </div>
             <div class="social-links">
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/923137518262" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/paratoapply" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://instagram.com/paratoapply" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/company/paratoapply" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
             <div class="copyright">
                 کلیه حقوق این وبسایت متعلق به پرتو اپلای می‌باشد © 2025
@@ -1705,6 +1755,9 @@
         // اسکرول هدر
         let lastScroll = 0;
         const header = document.getElementById('header');
+        const headerHeight = header.offsetHeight;
+        
+        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
         
         window.addEventListener('scroll', function() {
             const currentScroll = window.scrollY;
@@ -1745,6 +1798,21 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
+            });
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+            this.innerHTML = document.getElementById('nav-menu').classList.contains('show') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.remove('show');
+                document.getElementById('mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
         
@@ -1798,6 +1866,10 @@
         document.getElementById('consultation-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Show loading state
+            document.getElementById('submit-text').style.display = 'none';
+            document.getElementById('submit-loading').style.display = 'inline';
+            
             // Get form data
             const formData = new FormData(this);
             let whatsappMessage = "📝 درخواست مشاوره از پرتو اپلای:\n\n";
@@ -1821,8 +1893,17 @@
             // WhatsApp number
             const whatsappNumber = "+923137518262";
             
-            // Open WhatsApp with the message
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+            // Open WhatsApp with the message after a short delay
+            setTimeout(() => {
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                
+                // Reset form
+                document.getElementById('submit-text').style.display = 'inline';
+                document.getElementById('submit-loading').style.display = 'none';
+                
+                // Show success message
+                showModal('فرم شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.');
+            }, 1000);
         });
         
         // Toggle country details
@@ -1852,13 +1933,16 @@
             }
         }
         
-        // Scroll to form when consult button is clicked
-        document.getElementById('consult-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('consultation-form-container').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            return false;
+        }
         
         // Show modal when focusing on fullname field (only once)
         document.getElementById('fullname').addEventListener('focus', function() {
@@ -1868,16 +1952,25 @@
             }
         });
         
+        // Show modal function
+        function showModal(message) {
+            const modal = document.getElementById('info-modal');
+            if (message) {
+                modal.querySelector('p').textContent = message;
+            }
+            modal.style.display = 'flex';
+        }
+        
         // Close modal
         function closeModal() {
             document.getElementById('info-modal').style.display = 'none';
         }
         
-        // Open call modal
-        document.getElementById('call-btn').addEventListener('click', function(e) {
-            e.preventDefault();
+        // Show call modal
+        function showCallModal() {
             document.getElementById('call-modal').style.display = 'flex';
-        });
+            return false;
+        }
         
         // Close call modal
         function closeCallModal() {
@@ -1892,6 +1985,13 @@
             if (event.target === document.getElementById('call-modal')) {
                 closeCallModal();
             }
+        });
+        
+        // Show loading spinner when page is loading
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading-spinner').style.display = 'none';
+            }, 500);
         });
     </script>
 </body>
