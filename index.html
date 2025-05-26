@@ -41,6 +41,10 @@
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
         }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
         
         .header-line {
             position: fixed;
@@ -276,7 +280,6 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            margin-left: 20px;
         }
         
         .form-title {
@@ -310,6 +313,12 @@
             font-weight: 600;
             color: #555;
             font-size: 14px;
+        }
+
+        .form-group label .number-note {
+            color: red;
+            font-size: 11px;
+            margin-right: 5px;
         }
         
         .form-group input,
@@ -698,13 +707,6 @@
             background-color: #b78a14;
         }
         
-        /* Number Input Warning */
-        .number-warning {
-            color: red;
-            font-size: 11px;
-            display: none;
-        }
-        
         @media (max-width: 1200px) {
             .hero {
                 height: auto;
@@ -718,6 +720,7 @@
             
             .form-container {
                 margin-left: 0;
+                margin-top: 30px;
             }
         }
         
@@ -808,44 +811,20 @@
         @media (max-width: 576px) {
             .logo {
                 font-size: 28px;
-                order: 1;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            header {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .header-buttons {
-                order: 2;
-                width: 100%;
-                justify-content: space-around;
-                margin-top: 10px;
-            }
-            
-            nav {
-                order: 3;
-                width: 100%;
-                margin-top: 15px;
             }
             
             .hero {
-                margin-top: 200px;
+                margin-top: 140px;
                 padding: 0 15px;
             }
             
             .roadmap-item {
                 flex-direction: row;
                 align-items: center;
-                margin-bottom: 10px;
             }
             
             .roadmap-icon {
-                margin-left: 10px;
+                margin-left: 15px;
                 margin-bottom: 0;
             }
             
@@ -875,13 +854,38 @@
             .country-name {
                 font-size: 14px;
             }
-            
-            .form-section {
-                flex-direction: column;
+
+            /* Mobile header buttons layout */
+            header {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            
-            .countries-section {
-                margin-left: 0;
+
+            .logo {
+                order: 1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .header-buttons {
+                order: 2;
+                width: 100%;
+                justify-content: space-around;
+                margin-top: 0;
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .consult-btn, .call-btn {
+                margin: 0;
+                padding: 10px 15px;
+                font-size: 14px;
             }
         }
     </style>
@@ -904,7 +908,7 @@
                 <li><a href="#">کشورها</a></li>
                 <li><a href="#">مهاجرت</a></li>
                 <li><a href="#">ویزا</a></li>
-                <li><a href="#">همکاری</a></li>
+                <li><a href="#">مقالات</a></li>
                 <li><a href="#" onclick="showAboutPage()">درباره ما</a></li>
                 <li><a href="#">تماس با ما</a></li>
             </ul>
@@ -983,7 +987,7 @@
             </div>
         </section>
 
-        <section style="display: flex; padding: 0 5%; margin-top: 50px; margin-bottom: 50px; gap: 30px; flex-direction: column;" class="form-section">
+        <section style="display: flex; flex-direction: column; padding: 0 5%; margin-top: 50px; margin-bottom: 50px; gap: 30px;" class="form-section">
             <div class="form-container" id="consultation-form-container">
                 <h2 class="form-title">فرم درخواست مشاوره</h2>
                 <form id="consultation-form">
@@ -993,7 +997,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="age">سن <span class="number-warning">(لطفاً از اعداد انگلیسی استفاده کنید)</span></label>
+                        <label for="age">سن <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
                         <input type="number" id="age" name="age" required>
                     </div>
                     
@@ -1019,7 +1023,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="gpa">معدل دیپلم <span class="number-warning">(لطفاً از اعداد انگلیسی استفاده کنید)</span></label>
+                        <label for="gpa">معدل دیپلم <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
                         <input type="number" step="0.01" id="gpa" name="gpa" required>
                     </div>
                     
@@ -1038,7 +1042,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="budget">سالیانه حداکثر چه مقدار می‌توانید شهریه پرداخت کنید (دلار) <span class="number-warning">(لطفاً از اعداد انگلیسی استفاده کنید)</span></label>
+                        <label for="budget">سالیانه حداکثر چه مقدار می‌توانید شهریه پرداخت کنید (دلار) <span class="number-note">(از اعداد انگلیسی استفاده کنید)</span></label>
                         <input type="number" id="budget" name="budget" required>
                     </div>
                     
@@ -1279,8 +1283,27 @@
 
     <script>
         // اسکرول هدر
+        let lastScroll = 0;
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll <= 0) {
+                header.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+                // Scrolling down
+                header.classList.add('hidden');
+            } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+                // Scrolling up
+                header.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+            
+            // Add scrolled class for background
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
@@ -1388,36 +1411,11 @@
         });
         
         // Show modal when focusing on fullname field (only once)
-        let modalShown = localStorage.getItem('modalShown');
         document.getElementById('fullname').addEventListener('focus', function() {
-            if (!modalShown) {
+            if (!localStorage.getItem('modalShown')) {
                 document.getElementById('info-modal').style.display = 'flex';
                 localStorage.setItem('modalShown', 'true');
             }
-        });
-        
-        // Show number warnings for number inputs
-        const numberInputs = document.querySelectorAll('input[type="number"]');
-        numberInputs.forEach(input => {
-            const warning = input.previousElementSibling.querySelector('.number-warning');
-            
-            input.addEventListener('input', function() {
-                if (this.value.match(/[۰-۹]/)) {
-                    warning.style.display = 'inline';
-                } else {
-                    warning.style.display = 'none';
-                }
-            });
-            
-            input.addEventListener('focus', function() {
-                if (this.value.match(/[۰-۹]/)) {
-                    warning.style.display = 'inline';
-                }
-            });
-            
-            input.addEventListener('blur', function() {
-                warning.style.display = 'none';
-            });
         });
         
         // Close modal
