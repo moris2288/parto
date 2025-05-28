@@ -183,6 +183,31 @@
             cursor: pointer;
             padding: 5px;
         }
+
+        /* Mobile Header Buttons */
+        .mobile-header-buttons {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 998;
+            justify-content: space-between;
+        }
+
+        .mobile-header-buttons a {
+            flex: 1;
+            margin: 0 5px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+            max-width: calc(50% - 10px);
+        }
         
         /* Hero Section */
         .hero {
@@ -1239,9 +1264,13 @@
                 font-size: 13px;
             }
 
-            /* Mobile header buttons layout */
+            /* Mobile header buttons */
             .header-buttons {
                 display: none;
+            }
+
+            .mobile-header-buttons {
+                display: flex;
             }
             
             .back-to-top {
@@ -1292,6 +1321,18 @@
             </a>
         </div>
     </header>
+
+    <!-- Mobile Header Buttons -->
+    <div class="mobile-header-buttons">
+        <a href="#" class="call-btn" onclick="showCallModal()">
+            <i class="fas fa-phone"></i>
+            تماس مستقیم
+        </a>
+        <a href="#" class="consult-btn" onclick="scrollToSection('consultation-form-container')">
+            <i class="fas fa-calendar-alt"></i>
+            رزرو مشاوره
+        </a>
+    </div>
     
     <!-- Main Content -->
     <div id="main-content">
@@ -1844,7 +1885,7 @@
             const encodedMessage = encodeURIComponent(whatsappMessage);
             
             // WhatsApp number
-            const whatsappNumber = "+923137518262";
+            const whatsappNumber = "923137518262";
             
             // Open WhatsApp with the message after a short delay
             setTimeout(() => {
